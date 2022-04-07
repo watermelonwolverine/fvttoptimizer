@@ -1,0 +1,6 @@
+/venv
+__pycache__
+/test/foundrydata
+/build
+/dist
+/fvttmv.exe.spec
