@@ -2,8 +2,13 @@
 import json
 import os
 import shutil
+import sys
 import zipapp
 from os import path
+
+import main
+
+sys.path.append("src")
 
 from fvttoptimizer import config
 from main import app_name, path_to_config_file_linux
@@ -20,8 +25,14 @@ def prepare_archive():
     shutil.copy("src/main.py",
                 "temp/")
 
-    shutil.copytree("src/fvttoptimizer",
-                    "temp/fvttoptimizer")
+    shutil.copy("src/version_checker.py",
+                "temp/")
+
+    shutil.copy("src/help_text.py",
+                "temp/")
+
+    shutil.copytree("src/{0}".format(main.app_name),
+                    "temp/{0}".format(main.app_name))
 
     zipapp.create_archive("temp",
                           "{0}.pyz".format(app_name),
@@ -75,16 +86,14 @@ def install():
                 path.abspath(path_to_foundry_data)
         }
 
-    path_to_config_file = path_to_config_file_linux
-
     try:
 
-        with open(path_to_config_file, "w+", encoding="utf-8") as config_fout:
+        with open(path_to_config_file_linux, "w+", encoding="utf-8") as config_fout:
             json.dump(config_dict, config_fout)
-            print("Created config file {0}".format(path_to_config_file))
+            print("Created config file {0}".format(path_to_config_file_linux))
     except BaseException as error:
         print(error)
-        print("Unable to write config file to {0}. Cancelling installation...".format(path_to_config_file))
+        print("Unable to write config file to {0}. Cancelling installation...".format(path_to_config_file_linux))
         exit()
 
     try:
@@ -96,7 +105,7 @@ def install():
         print("Unable to copy {0} to /usr/bin/. "
               "Try running installer with sudo. "
               "Cancelling installation...".format(app_name))
-        os.remove(path_to_config_file)
+        os.remove(path_to_config_file_linux)
         exit()
 
     try:
@@ -106,7 +115,7 @@ def install():
         print("Unable to make {0} executable. "
               "Try running installer with sudo. "
               "Cancelling installation...".format(path_to_executable_file))
-        os.remove(path_to_config_file)
+        os.remove(path_to_config_file_linux)
         os.remove(path_to_executable_file)
         exit()
 
