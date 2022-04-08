@@ -1,8 +1,9 @@
 import os
 import shutil
+import sys
 
 from fvttoptimizer.exception import FvttOptimizerException
-from test.common import AbsPaths, References, TestBase, ReplaceReferenceCall, Checksums, unchanged_directory_tree
+from test.common import AbsPaths, References, TestBase, ReplaceReferenceCall, Checksums, unchanged_directory_tree, C
 
 
 class OptimizerTest(TestBase):
@@ -220,8 +221,45 @@ class OptimizerTest(TestBase):
     def test_optimize_override_percent(self):
         print("test_optimize_override_percent")
 
-        self.run_config.override_percent = 1
+        self.run_config.override_percent = 99
 
         self.optimizer.optimize(AbsPaths.file1_png)
 
         self.assert_nothing_changed()
+
+    def test_optimize_wrongly_cased_file(self):
+
+        print("test_optimize_wrongly_cased_file")
+
+        if sys.platform == "linux":
+            print("SKIPPED")
+            return
+
+        self.optimizer.optimize(os.path.join(AbsPaths.images, C.file1_png.upper()))
+
+        expected_update_reference_call = \
+            [
+                ReplaceReferenceCall(References.file1_png,
+                                     References.file1_webp)
+            ]
+
+        self.assert_reference_updater_calls_equal(expected_update_reference_call)
+
+        expected_directory_tree = \
+            [AbsPaths.assets,
+             AbsPaths.images,
+             AbsPaths.file1_webp,
+             AbsPaths.file2_jpg,
+             AbsPaths.sub_folder,
+             AbsPaths.file3_webp,
+             AbsPaths.modules,
+             AbsPaths.systems,
+             AbsPaths.worlds,
+             AbsPaths.some_world
+             ]
+
+        self.assert_directory_tree_equals(expected_directory_tree)
+
+        self.assert_sha256_hex_equals(AbsPaths.file1_webp, Checksums.file1_webp_75)
+        self.assert_sha256_hex_equals(AbsPaths.file2_jpg, Checksums.file2_jpg)
+        self.assert_sha256_hex_equals(AbsPaths.file3_webp, Checksums.file3_webp)

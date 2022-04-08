@@ -25,6 +25,12 @@ class ProgramConfigImpl(ProgramConfig):
     def get_abs_path_to_foundry_data(self):
         return self.__abs_path_to_foundry_data
 
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __repr__(self):
+        return str(self)
+
 
 class RunConfig(ProgramConfig):
     __program_config: ProgramConfig
@@ -32,9 +38,8 @@ class RunConfig(ProgramConfig):
     quality: int = 75
     # if the the program should go into sub folders
     recursive: bool = False
-    # the percent of the new file size compared to the old file size.
-    # If the new file size is over this value, don't override
-    override_percent: int = 100
+    # how much smaller the new file has to be than the old one in percent
+    override_percent: int = 25
     # if webp files should be skipped
     skip_webp: bool = False
     # Skip files of which a webp exists
@@ -47,6 +52,12 @@ class RunConfig(ProgramConfig):
 
     def get_abs_path_to_foundry_data(self) -> str:
         return self.__program_config.get_abs_path_to_foundry_data()
+
+    def __str__(self):
+        return str(self.__dict__)
+
+    def __repr__(self):
+        return str(self)
 
 
 class ConfigFileReader:

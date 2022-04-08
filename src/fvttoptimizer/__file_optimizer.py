@@ -1,6 +1,8 @@
+import glob
 import io
 import logging
 import os
+import sys
 
 from PIL import Image
 from fvttmv.path_tools import PathTools
@@ -31,7 +33,8 @@ class FileOptimizer:
         extension = abs_path_to_file.split(".")[-1]
 
         if extension.lower() in file_extensions:
-            self.__maybe_optimize2(abs_path_to_file)
+            case_correct_abs_path = self.__get_correctly_cased_path(abs_path_to_file)
+            self.__maybe_optimize2(case_correct_abs_path)
 
     def __maybe_optimize2(self,
                           abs_path_to_file: str) -> None:
@@ -55,7 +58,7 @@ class FileOptimizer:
         old_size = os.path.getsize(abs_path_to_file)
         new_size = len(converted_bytes)
 
-        if (new_size / old_size) * 100 > self.__run_config.override_percent:
+        if 100 - (new_size / old_size) * 100 < self.__run_config.override_percent:
             logging.info(
                 "Skipping %s. Conversion does not result in a significant file size decrease.",
                 abs_path_to_file)
@@ -117,3 +120,20 @@ class FileOptimizer:
         result = os.path.join(abs_path_to_parent_dir, new_filename)
 
         return result
+
+    @staticmethod
+    def __get_correctly_cased_path(abs_path_to_file):
+
+        if sys.platform == "linux":
+            return abs_path_to_file
+        if sys.platform == "win32":
+            dirs = abs_path_to_file.split('\\')
+            # disk letter
+            test_name = [dirs[0].upper()]
+            for d in dirs[1:]:
+                test_name += ["%s[%s]" % (d[:-1], d[-1])]
+            res = glob.glob('\\'.join(test_name))
+            if not res:
+                # File not found
+                return None
+            return res[0]
