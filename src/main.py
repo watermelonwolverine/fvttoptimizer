@@ -6,11 +6,13 @@ from typing import List
 
 from fvttmv.update.references_updater import ReferencesUpdater
 
+import fvttoptimizer
 from fvttoptimizer.config import ProgramConfig, ConfigFileReader, RunConfig
 from fvttoptimizer.exception import FvttOptimizerException, FvttOptimizerInternalException
 from fvttoptimizer.optimizer import Optimizer
 
-version = "0.1.0"
+from help_text import help_text
+from version_checker import check_package_versions
 
 app_name = "fvttoptimizer"
 config_file_name = "{0}.conf".format(app_name)
@@ -25,6 +27,7 @@ quality_option = "--quality"
 override_percent_option = "--override-percent"
 skip_existing_option = "--skip-existing"
 skip_webp_option = "--skip-webp"
+help_option = "--help"
 
 allowed_args = [
     version_option,
@@ -34,7 +37,8 @@ allowed_args = [
     quality_option,
     override_percent_option,
     skip_existing_option,
-    skip_webp_option
+    skip_webp_option,
+    help_option
 ]
 
 
@@ -190,6 +194,9 @@ def process_and_remove_config_args(
 
 
 def do_run() -> None:
+
+    check_package_versions()
+
     src_list: list
     dst: str
 
@@ -202,8 +209,12 @@ def do_run() -> None:
     logging.debug("Got arguments %s",
                   sys.argv)
 
+    if help_option in args:
+        print(help_text)
+        return
+
     if version_option in args:
-        print("{0} version: {1}".format(app_name, version))
+        print("{0} version: {1}".format(app_name, fvttoptimizer.__version__))
         return
 
     run_config = RunConfig(read_config_file())

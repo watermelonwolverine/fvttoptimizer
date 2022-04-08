@@ -2,8 +2,8 @@ import os
 
 from fvttmv.path_tools import PathTools
 
+from fvttoptimizer.__file_optimizer import FileOptimizer
 from fvttoptimizer.config import RunConfig
-from fvttoptimizer.file_optimizer import FileOptimizer
 
 
 class DirectoryOptimizer:

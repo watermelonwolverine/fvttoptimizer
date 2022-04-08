@@ -1,1 +1,3 @@
 Pillow >= 9.1.0
+PyInstaller >= 4.10
+fvttmv = 0.2.2

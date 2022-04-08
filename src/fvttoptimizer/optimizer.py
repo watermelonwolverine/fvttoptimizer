@@ -3,10 +3,10 @@ import os
 from fvttmv.path_tools import PathTools
 from fvttmv.update.references_updater import ReferencesUpdater
 
-from fvttoptimizer.config import RunConfig
-from fvttoptimizer.directory_optimizer import DirectoryOptimizer
+from fvttoptimizer.__directory_optimizer import DirectoryOptimizer
+from fvttoptimizer.__file_optimizer import FileOptimizer
+from fvttoptimizer.config import RunConfig, ProgramConfigChecker
 from fvttoptimizer.exception import FvttOptimizerException
-from fvttoptimizer.file_optimizer import FileOptimizer
 
 taboo_dirs = ["worlds", "modules", "systems"]
 
@@ -29,6 +29,8 @@ class Optimizer:
         self.__directory_optimizer = DirectoryOptimizer(run_config,
                                                         self.__path_tools,
                                                         self.__file_optimizer)
+
+        ProgramConfigChecker.check_config(run_config)
 
     def optimize(self,
                  abs_path: str):

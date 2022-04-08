@@ -2,6 +2,8 @@ import json
 import logging
 import os
 
+from fvttmv.path_tools import PathTools
+
 from fvttoptimizer.exception import FvttOptimizerException
 
 absolute_path_to_foundry_data_key = "absolute_path_to_foundry_data"
@@ -18,6 +20,7 @@ class ProgramConfigImpl(ProgramConfig):
     def __init__(self,
                  abs_path_to_foundry_data: str):
         self.__abs_path_to_foundry_data = abs_path_to_foundry_data
+        ProgramConfigChecker.check_config(self)
 
     def get_abs_path_to_foundry_data(self):
         return self.__abs_path_to_foundry_data
@@ -67,3 +70,15 @@ class ConfigFileReader:
         result = ProgramConfigImpl(config_dict[absolute_path_to_foundry_data_key])
 
         return result
+
+
+class ProgramConfigChecker:
+
+    @staticmethod
+    def check_config(program_config: ProgramConfig):
+        abs_path_to_foundry_data = program_config.get_abs_path_to_foundry_data()
+
+        if not os.path.isabs(abs_path_to_foundry_data) \
+                or not PathTools.is_normalized_path(abs_path_to_foundry_data) \
+                or not os.path.isdir(abs_path_to_foundry_data):
+            raise FvttOptimizerException("Absolute path to foundrydata is not configured correctly.")

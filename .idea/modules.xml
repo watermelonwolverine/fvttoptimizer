@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/fvttopti.iml" filepath="$PROJECT_DIR$/.idea/fvttopti.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/fvttoptimizer.iml" filepath="$PROJECT_DIR$/.idea/fvttoptimizer.iml" />
     </modules>
   </component>
 </project>
