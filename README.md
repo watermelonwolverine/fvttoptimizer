@@ -57,7 +57,7 @@ Copy fvttoptimizer.exe into that folder.
 
 Create a fvttoptimizer.conf text file in that folder.
 
-Copy `{"absolute_path_to_foundry_data":"INSERT_PATH_HERE"}` into fvttmv.conf
+Copy `{"absolute_path_to_foundry_data":"INSERT_PATH_HERE"}` into fvttoptimizer.conf
 
 Replace `INSERT_PATH_HERE` with the path to the Data folder inside your foundrydata
 (Not the foundrydata folder itself!).
@@ -127,8 +127,8 @@ Options
 image.webp is already in the same folder \
 `--skip-webp`: Don't touch webp files at all \
 `--quality`: The quality setting for the webp compression. Default is 75 \
-`--override-percent`: How much smaller the new file needs to be to replace the old one. For
-example if this value is 25% the file size after optimizing needs to be 25% smaller than the original. Default is 25 \
+`--override-percent`: How much smaller the new file needs to be to replace the old one. For example if this value is 25%
+the file size after optimizing needs to be 25% smaller than the original. Default is 25 \
 `--recursive`: If the optimization should be done recursively to all sub folders of the target folder.
 
 Examples
@@ -145,10 +145,10 @@ Windows:
 Optimizing a folder and all it's sub folders:
 
 Ubuntu:
-`fvttmvoptimizer --recursive pathto/folder`
+`fvttoptimizer --recursive pathto/folder`
 
 Windows:
-`fvttmvoptimizer.exe --recursive path\to\folder`
+`fvttoptimizer.exe --recursive path\to\folder`
 
 Use single quotes when moving a file with a space:
 
@@ -161,10 +161,10 @@ Windows:
 Change parameters:
 
 Ubuntu:
-`fvttoptimizer --quality 100 --override-percent 50 file.jpg`
+`fvttoptimizer --quality 50 --override-percent 50 file.jpg`
 
 Windows:
-`fvttoptimizer --quality 100 --override-percent 50 file.jpg`
+`fvttoptimizer --quality 50 --override-percent 50 file.jpg`
 
 Known Issues and Quirks
 =======================
