@@ -13,13 +13,13 @@ Step 1: Get the exe
 
 ### Option 1: Download
 
-Download one of the pre-built fvttoptimizer.exe files from `Releases`
+Download one of the pre-built `fvttoptimizer.exe` files from `Releases`
 
-Goto Step 2: Install program
+Go to Step 2: Install program
 
 ### Option 2: Build it yourself
 
-Install python3 (version >= 3.9) and add it to your PATH system environment variable.
+Install python3 (version >= 3.8) and add it to your PATH system environment variable.
 
 You can check the version via CMD or powershell with:
 
@@ -37,16 +37,16 @@ Activate the venv:
 
 Install pyInstaller package:
 
-`pip install pyInstaller>=4.10`
+`pip install pyInstaller==4.10`
 
 Install the Pillow package:
 
-`pip install pillow>=9.1.0`
+`pip install pillow==9.1.0`
 
 Download the fvttmv python package (whl file) from
-here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.2` move it into the folder and install it:
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.3` move it into the folder and install it:
 
-`pip install fvttmv-0.2.2-py3-none-any.whl`
+`pip install fvttmv-0.2.3-py3-none-any.whl`
 
 Run build file:
 
@@ -55,7 +55,7 @@ Run build file:
 You should now have a fvttoptimizer.exe file under dist. After the build succeeded you can delete the venv you
 previously created.
 
-Goto Step 2: Install program
+Go to Step 2: Install program
 
 Step 2: Install program
 -----------------------
@@ -71,7 +71,7 @@ Copy `{"absolute_path_to_foundry_data":"INSERT_PATH_HERE"}` into fvttoptimizer.c
 Replace `INSERT_PATH_HERE` with the path to the Data folder inside your foundrydata
 (Not the foundrydata folder itself!).
 
-IMPORTANT: Escape all \\ with \\\\ in that path.
+IMPORTANT: Escape all `\` with `\\` in that path.
 
 It should look something like this:
 
@@ -89,8 +89,8 @@ Remove the path to the installation directory from the PATH system environment v
 Installation: Ubuntu 16.04 -20.04
 =================================
 
-Step 0: Install Python
----------------------
+Optional: Install Python
+------------------------
 
 An up-to-date Ubuntu 20.04 should have python >= 3.8. Check it with:
 
@@ -101,20 +101,32 @@ replace `X` with `3`, `3.8`, `3.9` or `3.10` .
 
 Install python version>=3.8 if not yet installed.
 
-`sudo apt install pythonX pythonX-dev pythonX-venv`
+`sudo apt install pythonX`
 
-Step 1: Build the project
--------------------------
+Step 1: Get the executable
+--------------------------
+
+### Option 1: Download
+
+Download one of the pre-built `fvttoptimizer` files from `Releases`
+
+Go to Step 2: Install the files
+
+### Option 2: Build it yourself
+
+Install python if haven't already.
 
 Install Pillow dependencies (read more here `https://pillow.readthedocs.io/en/stable/installation.html`):
 
-`sudo apt install libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \
+`sudo apt install pythonX-dev libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \
 libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
 libharfbuzz-dev libfribidi-dev libxcb1-dev`
 
 Download or clone repo.
 
 Create venv inside the repo:
+
+`sudo apt install pythonX-venv`
 
 `pythonX -m venv ./venv`
 
@@ -142,9 +154,38 @@ Now run the build script:
 Step 2: Install the files
 -------------------------
 
+### Option 1: Automatic installation
+
+Install python if you haven't already.
+
+Clone the repo if you haven't already.
+
+Go into the project folder.
+
+Build the project if you haven't already. If you downloaded a pre-built executable. Create a folder named `dist` and move the file there. 
+
 Inside the project folder run:
 
 `sudo pythonX scripts/install_on_ubuntu.sh`
+
+### Option 2: Manual installation
+
+Copy the `fvttoptimizer` file either from `dist` from where you downloaded it to `usr/bin/fvttoptimizer`
+
+Make the file executable:
+
+`sudo chmod ugo=rx usr/bin/fvttoptimizer`
+
+Create a `fvttoptimizer.conf` file at `/etc/`
+
+Copy `{"absolute_path_to_foundry_data":"INSERT_PATH_HERE"}` into `fvttoptimizer.conf`
+
+Replace `INSERT_PATH_HERE` with the path to the Data folder inside your foundrydata
+(Not the foundrydata folder itself!).
+
+It should look something like this:
+
+`{"absolute_path_to_foundry_data":"/home/user/foundrydata/Data"}`
 
 Uninstallation: Ubuntu
 ======================
