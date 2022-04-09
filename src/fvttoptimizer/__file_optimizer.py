@@ -58,11 +58,15 @@ class FileOptimizer:
         old_size = os.path.getsize(abs_path_to_file)
         new_size = len(converted_bytes)
 
-        if 100 - (new_size / old_size) * 100 < self.__run_config.override_percent:
+        saved_percent = ((old_size - new_size) / old_size) * 100
+
+        if saved_percent < self.__run_config.override_percent:
             logging.info(
                 "Skipping %s. Conversion does not result in a significant file size decrease.",
                 abs_path_to_file)
             return
+
+        logging.info("Optimizing {0}. Decreased file size by {1}%".format(abs_path_to_file, saved_percent))
 
         self.__replace_file_with_webp(abs_path_to_file,
                                       converted_bytes)

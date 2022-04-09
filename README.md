@@ -137,7 +137,7 @@ here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.3` move it
 
 Now run the build script:
 
-`scrips/build_on_ubuntu.sh`
+`./scrips/build_for_ubuntu.sh`
 
 Step 2: Install the files
 -------------------------

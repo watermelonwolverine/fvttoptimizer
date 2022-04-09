@@ -7,9 +7,9 @@ from typing import List
 from fvttmv.update.references_updater import ReferencesUpdater
 
 import fvttoptimizer
-from __constants import app_name, config_file_name, path_to_config_file_linux
-from __help_text import help_text
-from __version_checker import check_package_versions
+from fvttoptimizer_wrapper.__constants import app_name, config_file_name, path_to_config_file_linux
+from fvttoptimizer_wrapper.__help_text import help_text
+from fvttoptimizer_wrapper.__version_checker import check_package_versions
 from fvttoptimizer.config import ProgramConfig, ConfigFileReader, RunConfig
 from fvttoptimizer.exception import FvttOptimizerException, FvttOptimizerInternalException
 from fvttoptimizer.optimizer import Optimizer
