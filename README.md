@@ -37,7 +37,16 @@ Activate the venv:
 
 Install pyInstaller package:
 
-`pip install pyInstaller`
+`pip install pyInstaller>=4.10`
+
+Install the Pillow package:
+
+`pip install pillow>=9.1.0`
+
+Download the fvttmv python package (whl file) from
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.2` move it into the folder and install it:
+
+`pip install fvttmv-0.2.2-py3-none-any.whl`
 
 Run build file:
 
@@ -77,20 +86,65 @@ Delete fvttoptimizer.exe and fvttoptimizer.conf files from the installation dire
 
 Remove the path to the installation directory from the PATH system environment variable.
 
-Installation: Ubuntu
-====================
+Installation: Ubuntu 16.04 -20.04
+=================================
 
-Install python3 if not yet installed
+Step 0: Install Python
+---------------------
 
-`sudo apt install python3`
+An up-to-date Ubuntu 20.04 should have python >= 3.8. Check it with:
+
+`python3 --version`
+
+From here on `pythonX` will be used as placeholder for the python you should use. Depending on your system you need to
+replace `X` with `3`, `3.8`, `3.9` or `3.10` .
+
+Install python version>=3.8 if not yet installed.
+
+`sudo apt install pythonX pythonX-dev pythonX-venv`
+
+Step 1: Build the project
+-------------------------
+
+Install Pillow dependencies (read more here `https://pillow.readthedocs.io/en/stable/installation.html`):
+
+`sudo apt install libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \
+libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
+libharfbuzz-dev libfribidi-dev libxcb1-dev`
 
 Download or clone repo.
 
-Run the install.py script inside the project folder with
+Create venv inside the repo:
 
-`sudo python3 ./scripts/install_on_ubuntu.py`
+`pythonX -m venv ./venv`
 
-and follow the installation instructions.
+Activate venv:
+
+`source venv/bin/activate`
+
+Install Pillow (should succeed if you installed all the dependencies):
+
+`pythonX -m pip install Pillow==9.1.0`
+
+Install pyInstaller:
+
+`pythonX -m pip install pyInstaller==4.10`
+
+Download the fvttmv python package (whl file) from
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.3` move it into the folder and install it:
+
+`pythonX -m pip install fvttmv-0.2.3-py3-none-any.whl`
+
+Now run the build script:
+
+`scrips/build_on_ubuntu.sh`
+
+Step 2: Install the files
+-------------------------
+
+Inside the project folder run:
+
+`sudo pythonX scripts/install_on_ubuntu.sh`
 
 Uninstallation: Ubuntu
 ======================

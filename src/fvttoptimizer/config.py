@@ -4,9 +4,10 @@ import os
 
 from fvttmv.path_tools import PathTools
 
+from fvttoptimizer import __constants
 from fvttoptimizer.exception import FvttOptimizerException
 
-absolute_path_to_foundry_data_key = "absolute_path_to_foundry_data"
+absolute_path_to_foundry_data_key = __constants.absolute_path_to_foundry_data_key
 
 
 class ProgramConfig:

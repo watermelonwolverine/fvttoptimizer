@@ -3,61 +3,21 @@ import json
 import os
 import shutil
 import sys
-import zipapp
 from os import path
-
-import main
 
 sys.path.append("src")
 
-from fvttoptimizer import config
-from main import app_name, path_to_config_file_linux
+from fvttoptimizer_wrapper.__constants import app_name, path_to_config_file_linux
+from fvttoptimizer.__constants import absolute_path_to_foundry_data_key
 
 path_to_executable_file = "/usr/bin/{0}".format(app_name)
 
 
-def prepare_archive():
-    if path.exists("temp"):
-        print("temp folder already exists. Please delete it execute the installation somewhere else.")
-
-    os.mkdir("temp")
-
-    shutil.copy("src/main.py",
-                "temp/")
-
-    shutil.copy("src/version_checker.py",
-                "temp/")
-
-    shutil.copy("src/help_text.py",
-                "temp/")
-
-    shutil.copytree("src/{0}".format(main.app_name),
-                    "temp/{0}".format(main.app_name))
-
-    zipapp.create_archive("temp",
-                          "{0}.pyz".format(app_name),
-                          main="main:main",
-                          interpreter="python3")
-
-    shutil.rmtree("temp")
-
-
-def create_executable_file():
-    prepare_archive()
-
-    with open(path_to_executable_file,
-              "wb") as appf:
-        appf.write(bytes("#!/usr/bin/env python3\n", "utf-8"))
-
-        with open("{0}.pyz".format(app_name),
-                  'rb') as zipf:
-            shutil.copyfileobj(zipf, appf)
-
-    os.remove("{0}.pyz".format(app_name))
-
-
 def install():
     print("Installing {0}".format(app_name))
+
+    if not os.path.exists("dist/{0}".format(app_name)):
+        raise Exception("No fvttoptimizer found under dist/. Did you successfully build the project?")
 
     path_to_foundry_data = input("Enter path to the 'Data' folder of your foundry data (for example "
                                  "/home/user/foundrydata/Data): ")
@@ -82,7 +42,7 @@ def install():
 
     config_dict = \
         {
-            config.absolute_path_to_foundry_data_key:
+            absolute_path_to_foundry_data_key:
                 path.abspath(path_to_foundry_data)
         }
 
@@ -98,7 +58,8 @@ def install():
 
     try:
 
-        create_executable_file()
+        shutil.copy("dist/{0}".format(app_name),
+                    path_to_executable_file)
 
     except BaseException as error:
         print(error)

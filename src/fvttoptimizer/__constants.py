@@ -1,0 +1,1 @@
+absolute_path_to_foundry_data_key = "absolute_path_to_foundry_data"
