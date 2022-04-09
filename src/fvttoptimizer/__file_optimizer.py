@@ -66,7 +66,7 @@ class FileOptimizer:
                 abs_path_to_file)
             return
 
-        logging.info("Optimizing {0}. Decreased file size by {1}%".format(abs_path_to_file, saved_percent))
+        logging.info("Optimizing {0}. Decreased file size by {1:.2g}%".format(abs_path_to_file, saved_percent))
 
         self.__replace_file_with_webp(abs_path_to_file,
                                       converted_bytes)

@@ -71,10 +71,10 @@ def check_package_versions():
     required_pillow_version = Version(9, 1, 0)
 
     fvttmv_version = Version.from_string(fvttmv.__version__)
-    required_fvttmv_version = Version(0, 2, 1)
+    required_fvttmv_version = Version(0, 2, 3)
 
-    if not pillow_version >= required_pillow_version:
-        raise FvttOptimizerException("Requirement not met: Pillow version >= {0}".format(required_pillow_version))
+    if not pillow_version == required_pillow_version:
+        raise FvttOptimizerException("Requirement not met: Pillow version == {0}".format(required_pillow_version))
 
-    if not fvttmv_version >= required_fvttmv_version:
-        raise FvttOptimizerException("Requirement not met: fvttmv version >= {0}".format(required_fvttmv_version))
+    if not fvttmv_version == required_fvttmv_version:
+        raise FvttOptimizerException("Requirement not met: fvttmv version == {0}".format(required_fvttmv_version))
