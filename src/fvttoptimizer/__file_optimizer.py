@@ -1,8 +1,6 @@
-import glob
 import io
 import logging
 import os
-import sys
 
 from PIL import Image
 from fvttmv.path_tools import PathTools
@@ -33,8 +31,7 @@ class FileOptimizer:
         extension = abs_path_to_file.split(".")[-1]
 
         if extension.lower() in file_extensions:
-            case_correct_abs_path = self.__get_correctly_cased_path(abs_path_to_file)
-            self.__maybe_optimize2(case_correct_abs_path)
+            self.__maybe_optimize2(abs_path_to_file)
 
     def __maybe_optimize2(self,
                           abs_path_to_file: str) -> None:
@@ -124,20 +121,3 @@ class FileOptimizer:
         result = os.path.join(abs_path_to_parent_dir, new_filename)
 
         return result
-
-    @staticmethod
-    def __get_correctly_cased_path(abs_path_to_file):
-
-        if sys.platform == "linux":
-            return abs_path_to_file
-        if sys.platform == "win32":
-            dirs = abs_path_to_file.split('\\')
-            # disk letter
-            test_name = [dirs[0].upper()]
-            for d in dirs[1:]:
-                test_name += ["%s[%s]" % (d[:-1], d[-1])]
-            res = glob.glob('\\'.join(test_name))
-            if not res:
-                # File not found
-                return None
-            return res[0]

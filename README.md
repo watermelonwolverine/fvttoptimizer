@@ -1,9 +1,8 @@
 About
 =====
 
-Optimizes images by (re-)saving them as webp. Works on single files as well as on folders.
-
-IMPORTANT: Shut down Foundry VTT optimizing any files.
+Optimizes images by (re-)saving them as webp. For every file it replaced it automatically updates all references.
+Works on single files as well as on folders.
 
 Installation: Windows
 =====================
@@ -35,18 +34,18 @@ Activate the venv:
 
 `.\venv\Scripts\activate`
 
-Install pyInstaller package:
-
-`pip install pyInstaller==4.10`
-
 Install the Pillow package:
 
 `pip install pillow==9.1.0`
 
-Download the fvttmv python package (whl file) from
-here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.3` move it into the folder and install it:
+Install pyInstaller package:
 
-`pip install fvttmv-0.2.3-py3-none-any.whl`
+`pip install pyInstaller==4.10`
+
+Download the fvttmv python package (whl file) from
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.4` move it into the folder and install it:
+
+`pip install fvttmv-0.2.4-py3-none-any.whl`
 
 Run build file:
 
@@ -75,7 +74,7 @@ IMPORTANT: Escape all `\` with `\\` in that path.
 
 It should look something like this:
 
-`{"absolute_path_to_foundry_data":"C:Users\\user\\foundrydata\\Data"}`
+`{"absolute_path_to_foundry_data":"C:\\Users\\user\\foundrydata\\Data"}`
 
 Add the installation path to your PATH system environment variable.
 
@@ -118,9 +117,7 @@ Install python if haven't already.
 
 Install Pillow dependencies (read more here `https://pillow.readthedocs.io/en/stable/installation.html`):
 
-`sudo apt install pythonX-dev libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev \
-libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk \
-libharfbuzz-dev libfribidi-dev libxcb1-dev`
+`sudo apt install pythonX-dev libtiff5-dev libjpeg8-dev libopenjp2-7-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev tcl8.6-dev tk8.6-dev python3-tk libharfbuzz-dev libfribidi-dev libxcb1-dev`
 
 Download or clone repo.
 
@@ -143,9 +140,9 @@ Install pyInstaller:
 `pythonX -m pip install pyInstaller==4.10`
 
 Download the fvttmv python package (whl file) from
-here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.3` move it into the folder and install it:
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/0.2.4` move it into the folder and install it:
 
-`pythonX -m pip install fvttmv-0.2.3-py3-none-any.whl`
+`pythonX -m pip install fvttmv-0.2.4-py3-none-any.whl`
 
 Now run the build script:
 
@@ -207,23 +204,33 @@ Syntax
 
 `fvttoptimizer [--verbose-info, --verbose-debug, --version, --help, --quality value, --override-percent value, --skip-webp, --skip-existing, --recursive] target`
 
-`src`: Source path which should be moved or checked\
-`*srcs`: Optional additional source paths\
+`src`: Source path which should be moved or checked
+
+`*srcs`: Optional additional source paths
+
 `dst`: Path to destination folder or file, needed when not using the --check option
 
 Options
 -------
 
-`--verbose-info`: Enables verbose output to console\
-`--verbose-debug`: Enables very verbose output to console\
-`--version`: Prints version and exits\
-`--help`: Display help and exit \
+`--verbose-info`: Enables verbose output to console
+
+`--verbose-debug`: Enables very verbose output to console
+
+`--version`: Prints version and exits
+
+`--help`: Display help and exit 
+
 `--skip-existing`: Ignores files of which a webp already exists. For example image.png will not be converted if a
-image.webp is already in the same folder \
-`--skip-webp`: Don't touch webp files at all \
-`--quality`: The quality setting for the webp compression. Default is 75 \
-`--override-percent`: How much smaller the new file needs to be to replace the old one. For example if this value is 25%
-the file size after optimizing needs to be 25% smaller than the original. Default is 25 \
+image.webp is already in the same folder 
+
+`--skip-webp`: Don't touch webp files at all 
+
+`--quality`: The quality setting for the webp compression. Default is 75 
+
+`--override-percent`: How much smaller the new file needs to be to replace the old one. For example if this value is 25
+the file size after optimizing needs to be 25% smaller than the original. Default is 25 
+
 `--recursive`: If the optimization should be done recursively to all sub folders of the target folder.
 
 Examples
@@ -231,10 +238,10 @@ Examples
 
 Optimizing a file:
 
-Ubuntu:  
+Ubuntu:
 `fvttoptimizer path/to/file.png`
 
-Windows:  
+Windows:
 `fvttoptimizer path\to\file.png`
 
 Optimizing a folder and all it's sub folders:
@@ -272,4 +279,3 @@ The program only works in powershell not in cmd.
 When one of the paths has `\'` at the end, the arguments will get mixed up. This is a problem with how python handles
 arguments and probably can't be fixed. For example on Windows `fvttoptimizer.exe '\folder name with spaces\'`
 will fail but `fvttoptimizer.exe '\folder name with spaces'` will succeed.
-

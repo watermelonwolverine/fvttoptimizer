@@ -36,10 +36,12 @@ class Optimizer:
                  abs_path: str):
         self.__assert_path_is_ok(abs_path)
 
+        case_correct_abs_path = PathTools.get_correctly_cased_path(abs_path)
+
         if os.path.isdir(abs_path):
-            self.__directory_optimizer.optimize(abs_path)
+            self.__directory_optimizer.optimize(case_correct_abs_path)
         elif os.path.isfile(abs_path):
-            self.__file_optimizer.maybe_optimize(abs_path)
+            self.__file_optimizer.maybe_optimize(case_correct_abs_path)
 
     def __assert_path_is_ok(self,
                             path: str):

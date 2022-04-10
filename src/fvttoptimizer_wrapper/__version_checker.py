@@ -3,6 +3,10 @@ import fvttmv
 
 from fvttoptimizer.exception import FvttOptimizerException
 
+required_pillow_version_str = "9.1.0"
+required_fvttmv_version_str = "0.2.4"
+required_pyinstaller_version_str = "4.10"
+
 
 class Version:
 
@@ -68,10 +72,10 @@ class Version:
 
 def check_package_versions():
     pillow_version = Version.from_string(PIL.__version__)
-    required_pillow_version = Version(9, 1, 0)
+    required_pillow_version = Version.from_string(required_pillow_version_str)
 
     fvttmv_version = Version.from_string(fvttmv.__version__)
-    required_fvttmv_version = Version(0, 2, 3)
+    required_fvttmv_version = Version.from_string(required_fvttmv_version_str)
 
     if not pillow_version == required_pillow_version:
         raise FvttOptimizerException("Requirement not met: Pillow version == {0}".format(required_pillow_version))

@@ -1,18 +1,21 @@
 import logging
 import os
 import sys
+import traceback
 from os import path
 from typing import List
 
 from fvttmv.update.references_updater import ReferencesUpdater
 
 import fvttoptimizer
-from fvttoptimizer_wrapper.__constants import app_name, config_file_name, path_to_config_file_linux
-from fvttoptimizer_wrapper.__help_text import help_text
-from fvttoptimizer_wrapper.__version_checker import check_package_versions
 from fvttoptimizer.config import ProgramConfig, ConfigFileReader, RunConfig
 from fvttoptimizer.exception import FvttOptimizerException, FvttOptimizerInternalException
 from fvttoptimizer.optimizer import Optimizer
+from fvttoptimizer_wrapper.__constants import app_name, config_file_name, path_to_config_file_linux, issues_url
+from fvttoptimizer_wrapper.__help_text import help_text
+from fvttoptimizer_wrapper.__version_checker import check_package_versions
+
+bug_report_message = "Please file a bug report on %s" % issues_url
 
 version_option = "--version"
 verbose_info_option = "--verbose-info"
@@ -230,17 +233,21 @@ def do_run() -> None:
 def main() -> None:
     try:
         do_run()
-    except FvttOptimizerInternalException as internal_exception:
-        logging.error(internal_exception)
-        print("An internal error occurred: " + str(internal_exception))
+    except FvttOptimizerInternalException:
+        formatted = traceback.format_exc()
+        logging.error(formatted)
+        print("An internal error occurred: " + str(formatted))
+        print(bug_report_message)
     except FvttOptimizerException as exception:
         logging.error(exception)
         print(str(exception))
     except SystemExit:
         pass
-    except BaseException as unexpected_exception:
-        logging.error(unexpected_exception)
-        print("An unexpected error occurred: " + str(unexpected_exception))
+    except BaseException:
+        formatted = traceback.format_exc()
+        logging.error(formatted)
+        print("An internal error occurred: " + str(formatted))
+        print(bug_report_message)
 
 
 if __name__ == "__main__":
