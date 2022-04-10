@@ -1,1 +1,1 @@
-pyinstaller .\src\fvttoptimizer_wrapper\main.py --onefile --clean --name fvttoptimizer.exe
+pyinstaller .\src\cli_wrapper\main.py --onefile --clean --name fvttoptimizer.exe

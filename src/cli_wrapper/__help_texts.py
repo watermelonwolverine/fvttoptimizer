@@ -1,4 +1,5 @@
-from fvttoptimizer_wrapper import __version_checker
+from cli_wrapper import __version_checker
+from cli_wrapper.__constants import app_name
 
 about = "\
 About\n\
@@ -21,7 +22,7 @@ your Foundry VTT data for cases where something goes wrong.\n\
 Syntax\n\
 ------\n\
 \n\
-`fvttoptimizer [--verbose-info, --verbose-debug, --version, --help, --quality value, --override-percent value, --skip-webp, --skip-existing, --recursive] target`\n\
+`{0} [--verbose-info, --verbose-debug, --version, --help, --quality value, --override-percent value, --skip-webp, --skip-existing, --recursive] target`\n\
 \n\
 `src`: Source path which should be moved or checked\n\
 \n\
@@ -58,34 +59,34 @@ Examples\n\
 Optimizing a file:\n\
 \n\
 Ubuntu:\n\
-`fvttoptimizer path/to/file.png`\n\
+`{0} path/to/file.png`\n\
 \n\
 Windows:\n\
-`fvttoptimizer path\\to\\file.png`\n\
+`{0} path\\to\\file.png`\n\
 \n\
 Optimizing a folder and all it's sub folders:\n\
 \n\
 Ubuntu:\n\
-`fvttoptimizer --recursive pathto/folder`\n\
+`{0} --recursive pathto/folder`\n\
 \n\
 Windows:\n\
-`fvttoptimizer.exe --recursive path\\to\\folder`\n\
+`{0}.exe --recursive path\\to\\folder`\n\
 \n\
 Use single quotes when moving a file with a space:\n\
 \n\
 Ubuntu:\n\
-`fvttoptimizer 'some folder/some file.jpg'`\n\
+`{0} 'some folder/some file.jpg'`\n\
 \n\
 Windows:\n\
-`fvttoptimizer.exe 'some folder\\some file.jpg'`\n\
+`{0}.exe 'some folder\\some file.jpg'`\n\
 \n\
 Change parameters:\n\
 \n\
 Ubuntu:\n\
-`fvttoptimizer --quality 50 --override-percent 50 file.jpg`\n\
+`{0} --quality 50 --override-percent 50 file.jpg`\n\
 \n\
 Windows:\n\
-`fvttoptimizer --quality 50 --override-percent 50 file.jpg`"
+`{0} --quality 50 --override-percent 50 file.jpg`".format(app_name)
 
 issues = "\
 Known Issues and Quirks\n\
@@ -97,8 +98,8 @@ Windows\n\
 The program only works in powershell not in cmd.\n\
 \n\
 When one of the paths has `\\'` at the end, the arguments will get mixed up. This is a problem with how python handles\n\
-arguments and probably can't be fixed. For example on Windows `fvttoptimizer.exe '\\folder name with spaces\\'`\n\
-will fail but `fvttoptimizer.exe '\\folder name with spaces'` will succeed."
+arguments and probably can't be fixed. For example on Windows `{0}.exe '\\folder name with spaces\\'`\n\
+will fail but `{0}.exe '\\folder name with spaces'` will succeed.".format(app_name)
 
 installation = "\
 Installation: Windows\n\
@@ -109,7 +110,7 @@ Step 1: Get the exe\n\
 \n\
 ### Option 1: Download\n\
 \n\
-Download one of the pre-built `fvttoptimizer.exe` files from `Releases`\n\
+Download one of the pre-built `{0}.exe` files from `Releases`\n\
 \n\
 Go to Step 2: Install program\n\
 \n\
@@ -133,22 +134,22 @@ Activate the venv:\n\
 \n\
 Install the Pillow package:\n\
 \n\
-`pip install pillow=={0}`\n\
+`pip install pillow=={1}`\n\
 \n\
 Install pyInstaller package:\n\
 \n\
-`pip install pyInstaller=={1}`\n\
+`pip install pyInstaller=={2}`\n\
 \n\
 Download the fvttmv python package (whl file) from\n\
-here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/{2}` move it into the folder and install it:\n\
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/{3}` move it into the folder and install it:\n\
 \n\
-`pip install fvttmv-{2}-py3-none-any.whl`\n\
+`pip install fvttmv-{3}-py3-none-any.whl`\n\
 \n\
 Run build file:\n\
 \n\
 `.\\scripts\\build_for_windows.cmd`\n\
 \n\
-You should now have a fvttoptimizer.exe file under dist. After the build succeeded you can delete the venv you\n\
+You should now have a {0}.exe file under dist. After the build succeeded you can delete the venv you\n\
 previously created.\n\
 \n\
 Go to Step 2: Install program\n\
@@ -156,13 +157,13 @@ Go to Step 2: Install program\n\
 Step 2: Install program\n\
 -----------------------\n\
 \n\
-Create an empty folder where you want to install the program for example C:\\fvttoptimizer\n\
+Create an empty folder where you want to install the program for example C:\\{0}\n\
 \n\
-Copy fvttoptimizer.exe into that folder.\n\
+Copy {0}.exe into that folder.\n\
 \n\
-Create a fvttoptimizer.conf text file in that folder.\n\
+Create a {0}.conf text file in that folder.\n\
 \n\
-Copy `{{\"absolute_path_to_foundry_data\":\"INSERT_PATH_HERE\"}}` into fvttoptimizer.conf\n\
+Copy `{{\"absolute_path_to_foundry_data\":\"INSERT_PATH_HERE\"}}` into {0}.conf\n\
 \n\
 Replace `INSERT_PATH_HERE` with the path to the Data folder inside your foundrydata\n\
 (Not the foundrydata folder itself!).\n\
@@ -178,7 +179,7 @@ Add the installation path to your PATH system environment variable.\n\
 Uninstallation: Windows\n\
 =======================\n\
 \n\
-Delete fvttoptimizer.exe and fvttoptimizer.conf files from the installation directory.\n\
+Delete {0}.exe and {0}.conf files from the installation directory.\n\
 \n\
 Remove the path to the installation directory from the PATH system environment variable.\n\
 \n\
@@ -204,7 +205,7 @@ Step 1: Get the executable\n\
 \n\
 ### Option 1: Download\n\
 \n\
-Download one of the pre-built `fvttoptimizer` files from `Releases`\n\
+Download one of the pre-built `{0}` files from `Releases`\n\
 \n\
 Go to Step 2: Install the files\n\
 \n\
@@ -230,16 +231,16 @@ Activate venv:\n\
 \n\
 Install Pillow (should succeed if you installed all the dependencies):\n\
 \n\
-`pythonX -m pip install Pillow=={0}`\n\
+`pythonX -m pip install Pillow=={1}`\n\
 \n\
 Install pyInstaller:\n\
 \n\
-`pythonX -m pip install pyInstaller=={1}`\n\
+`pythonX -m pip install pyInstaller=={2}`\n\
 \n\
 Download the fvttmv python package (whl file) from\n\
-here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/{2}` move it into the folder and install it:\n\
+here: `https://github.com/watermelonwolverine/fvttmv/releases/tag/{3}` move it into the folder and install it:\n\
 \n\
-`pythonX -m pip install fvttmv-{2}-py3-none-any.whl`\n\
+`pythonX -m pip install fvttmv-{3}-py3-none-any.whl`\n\
 \n\
 Now run the build script:\n\
 \n\
@@ -264,15 +265,15 @@ Inside the project folder run:\n\
 \n\
 ### Option 2: Manual installation\n\
 \n\
-Copy the `fvttoptimizer` file either from `dist` from where you downloaded it to `usr/bin/fvttoptimizer`\n\
+Copy the `{0}` file either from `dist` from where you downloaded it to `usr/bin/{0}`\n\
 \n\
 Make the file executable:\n\
 \n\
-`sudo chmod ugo=rx usr/bin/fvttoptimizer`\n\
+`sudo chmod ugo=rx usr/bin/{0}`\n\
 \n\
-Create a `fvttoptimizer.conf` file at `/etc/`\n\
+Create a `{0}.conf` file at `/etc/`\n\
 \n\
-Copy `{{\"absolute_path_to_foundry_data\":\"INSERT_PATH_HERE\"}}` into `fvttoptimizer.conf`\n\
+Copy `{{\"absolute_path_to_foundry_data\":\"INSERT_PATH_HERE\"}}` into `{0}.conf`\n\
 \n\
 Replace `INSERT_PATH_HERE` with the path to the Data folder inside your foundrydata\n\
 (Not the foundrydata folder itself!).\n\
@@ -284,7 +285,8 @@ It should look something like this:\n\
 Uninstallation: Ubuntu\n\
 ======================\n\
 \n\
-Delete the files /etc/fvttoptimizer.conf and /usr/bin/fvttoptimizer".format(
+Delete the files /etc/{0}.conf and /usr/bin/{0}".format(
+    app_name,
     __version_checker.required_pillow_version_str,
     __version_checker.required_pyinstaller_version_str,
     __version_checker.required_fvttmv_version_str

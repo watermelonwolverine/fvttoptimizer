@@ -7,7 +7,7 @@ from os import path
 
 sys.path.append("src")
 
-from fvttoptimizer_wrapper.__constants import app_name, path_to_config_file_linux
+from cli_wrapper.__constants import app_name, path_to_config_file_linux
 from fvttoptimizer.__constants import absolute_path_to_foundry_data_key
 
 path_to_executable_file = "/usr/bin/{0}".format(app_name)
@@ -17,7 +17,7 @@ def install():
     print("Installing {0}".format(app_name))
 
     if not os.path.exists("dist/{0}".format(app_name)):
-        raise Exception("No fvttoptimizer found under dist/. Did you successfully build the project?")
+        raise Exception("No {0} found under dist/. Did you successfully build the project?".format(app_name))
 
     path_to_foundry_data = input("Enter path to the 'Data' folder of your foundry data (for example "
                                  "/home/user/foundrydata/Data): ")
