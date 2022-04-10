@@ -1,3 +1,4 @@
+import logging
 import os
 
 from fvttmv.path_tools import PathTools
@@ -20,13 +21,15 @@ class DirectoryOptimizer:
         self.__file_optimizer = file_optimizer
 
     def optimize(self,
-                 path_to_directory):
+                 abs_path_to_dir):
 
-        contents = os.listdir(path_to_directory)
+        logging.info("Optimizing directory '%s'" % abs_path_to_dir)
+
+        contents = os.listdir(abs_path_to_dir)
 
         for element in contents:
 
-            abs_path_to_element = os.path.join(path_to_directory, element)
+            abs_path_to_element = os.path.join(abs_path_to_dir, element)
 
             if os.path.isfile(abs_path_to_element):
                 self.__file_optimizer.maybe_optimize(abs_path_to_element)
