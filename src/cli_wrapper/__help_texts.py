@@ -24,11 +24,7 @@ Syntax\n\
 \n\
 `{0} [--verbose-info, --verbose-debug, --version, --help, --quality value, --override-percent value, --skip-webp, --skip-existing, --recursive] target`\n\
 \n\
-`src`: Source path which should be moved or checked\n\
-\n\
-`*srcs`: Optional additional source paths\n\
-\n\
-`dst`: Path to destination folder or file, needed when not using the --check option\n\
+`target`: Path to file or directory which should be optimized\n\
 \n\
 Options\n\
 -------\n\

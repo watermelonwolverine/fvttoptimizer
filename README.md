@@ -204,11 +204,7 @@ Syntax
 
 `fvttoptimizer [--verbose-info, --verbose-debug, --version, --help, --quality value, --override-percent value, --skip-webp, --skip-existing, --recursive] target`
 
-`src`: Source path which should be moved or checked
-
-`*srcs`: Optional additional source paths
-
-`dst`: Path to destination folder or file, needed when not using the --check option
+`target`: Path to file or directory which should be optimized
 
 Options
 -------
