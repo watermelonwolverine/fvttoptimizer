@@ -11,3 +11,7 @@
 0.1.2
 =====
 - Removed worlds from the list of taboo directories
+
+0.1.3
+=====
+- Fixed help text and README.md
