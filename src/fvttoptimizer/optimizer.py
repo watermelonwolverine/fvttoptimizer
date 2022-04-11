@@ -8,7 +8,7 @@ from fvttoptimizer.__file_optimizer import FileOptimizer
 from fvttoptimizer.config import RunConfig, ProgramConfigChecker
 from fvttoptimizer.exception import FvttOptimizerException
 
-taboo_dirs = ["worlds", "modules", "systems"]
+taboo_dirs = ["modules", "systems"]
 
 
 class Optimizer:

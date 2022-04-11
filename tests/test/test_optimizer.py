@@ -179,7 +179,7 @@ class OptimizerTest(TestBase):
     def test_optimize_taboo_directory1(self):
         print("test_optimize_taboo_directory1")
 
-        for taboo_dir in [AbsPaths.worlds, AbsPaths.systems, AbsPaths.modules, AbsPaths.some_world]:
+        for taboo_dir in [AbsPaths.systems, AbsPaths.modules]:
 
             try:
                 self.optimizer.optimize(os.path.join(AbsPaths.Data, taboo_dir))

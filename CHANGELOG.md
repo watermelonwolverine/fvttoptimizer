@@ -6,4 +6,8 @@
 0.1.1
 =====
 - Upgraded to using fvttmv 0.2.4
-- Fixed issue with special characters in pathnames
+- Fixed issue with special characters in path names
+
+0.1.2
+=====
+- Removed worlds from the list of taboo directories
