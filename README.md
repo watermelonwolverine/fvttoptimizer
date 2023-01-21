@@ -1,3 +1,9 @@
+WARNING: DEPRECATED, DO NOT USE WITH FOUNDRYVTT VERSION >10
+=========================================================
+Because FoundryVTT changed its underlying database with version 11 this tool no longer works and should be considered deprecated.
+I will update it once I find the time.
+Until then, don't use it.
+
 About
 =====
 
